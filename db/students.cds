@@ -1,16 +1,27 @@
-using { cuid, User } from '@sap/cds/common';
-using { tum.cap.sample.Studies } from './studies';
-using { tum.cap.sample.common.Users } from './common';
+using { cuid } from '@sap/cds/common';
+using { tum.cap.sample.Studies, tum.cap.sample.Modules } from './studies';
 
 namespace tum.cap.sample;
 
 entity Students {
   key userID: String;
-      user : Association to one Users;
+      firstName: String;
+      lastName: String;
+      displayName: String = (firstName || ' ' || lastName);
       study: Association to one Studies;
+      modules : Composition of many ModuleAssignments on
+        modules.student = $self;
+}
+
+entity ModuleAssignments : cuid {
+  student : Association to one Students;
+  module  : Association to one Modules;
 }
 
 annotate Students with {
     userID @title : '{i18n>USERID}' @Common.Text : user.displayName @Common.TextArrangement : #TextFirst;
+    firstName @title : '{i18n>FIRSTNAME}';
+    lastName @title : '{i18n>LASTNAME}';
+    displayName @title: '{i18n>DISPLAYNAME}';
     study @title : '{i18n>STUDY}' @Common.Text : study.name @Common.TextArrangement : #TextOnly;
 }
