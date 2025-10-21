@@ -16,6 +16,7 @@ entity Students {
 entity ModuleAssignments : cuid {
   student : Association to one Students;
   module  : Association to one Modules;
+  assignedAt : Timestamp @cds.on.insert : $now;
 }
 
 annotate Students with {

@@ -19,14 +19,17 @@ service ModuleCatalogue {
             where: (not exists assignments[student.userID = $user.id])
         },
     ]
+    @Capabilities.Deletable : false
+    @Capabilities.Insertable : false
     entity Modules as projection on persistence.Modules {
         *,
-        (not exists assignments[student.userID = $user.id]) as isUserAssigned: Boolean @(UI.Hidden),
+        (exists assignments[student.userID = $user.id]) as isUserAssigned: Boolean @(UI.Hidden),
     } actions {
         @(
             Core.OperationAvailable : (not $self.isUserAssigned),
             Common.SideEffects : {
-                TargetProperties : [in.isUserAssigned]
+                TargetProperties : ['in/isUserAssigned'],
+                TargetEntities : ['/ModuleCatalogue.EntityContainer/ModuleAssignments']
             }
         )
         action assign();
@@ -43,10 +46,12 @@ service ModuleCatalogue {
             where: ($user.id = student.userID)
         },
     ]
+    @Capabilities.Deletable : false
+    @Capabilities.Insertable : false
     entity ModuleAssignments as projection on persistence.ModuleAssignments actions {
         @(
             Common.SideEffects : {
-                TargetEntities : ['/ModuleCatalogue.EntityContainer/ModuleAssignments']
+                TargetEntities : ['/ModuleCatalogue.EntityContainer/ModuleAssignments','/ModuleCatalogue.EntityContainer/Modules']
             }
         )
         action unassign();

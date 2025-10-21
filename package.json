@@ -30,5 +30,24 @@
     "app/students-management",
     "app/studies-management",
     "app/module-catalogue"
-  ]
+  ],
+  "cds": {
+    "requires": {
+    "[development]": {
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "alice": {
+            "password": "1234",
+            "roles": ["Student"]
+          },
+          "bob": {
+            "password": "1234",
+            "roles": ["Student"]
+          }
+        }
+      }
+    }
+  }
+  }
 }

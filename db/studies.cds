@@ -1,4 +1,4 @@
-using { cuid, managed, sap.common.CodeList } from '@sap/cds/common';
+using { cuid } from '@sap/cds/common';
 using { tum.cap.sample.Students, tum.cap.sample.ModuleAssignments } from './students';
 
 namespace tum.cap.sample;
@@ -7,7 +7,6 @@ entity Studies : cuid {
     initials: String(16);
     name: localized String(255);
     creditsForCompletion : Integer default 180;
-    semestersPerYear     : UInt8 default 2;
     duration             : Decimal(3, 1) default 3.0;
     modules : Composition of many Modules on modules.study = $self;
 

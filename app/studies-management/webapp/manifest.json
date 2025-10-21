@@ -117,6 +117,7 @@
             "settings": {
               "contextPath": "/Studies",
               "variantManagement": "Page",
+              "liveMode": true,
               "navigation": {
                 "Studies": {
                   "detail": {
