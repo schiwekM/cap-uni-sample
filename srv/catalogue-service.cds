@@ -23,7 +23,7 @@ service ModuleCatalogue {
     @Capabilities.Insertable : false
     entity Modules as projection on persistence.Modules {
         *,
-        (exists assignments[student.userID = $user.id]) as isUserAssigned: Boolean @(UI.Hidden),
+        (exists assignments[student.userID = $user.id] ? true : false) as isUserAssigned: Boolean @(UI.Hidden),
     } actions {
         @(
             Core.OperationAvailable : (not $self.isUserAssigned),
