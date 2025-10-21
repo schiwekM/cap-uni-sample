@@ -20,7 +20,7 @@ entity ModuleAssignments : cuid {
 }
 
 annotate Students with {
-    userID @title : '{i18n>USERID}' @Common.Text : user.displayName @Common.TextArrangement : #TextFirst;
+    userID @title : '{i18n>USERID}' @Common.Text : displayName @Common.TextArrangement : #TextFirst;
     firstName @title : '{i18n>FIRSTNAME}';
     lastName @title : '{i18n>LASTNAME}';
     displayName @title: '{i18n>DISPLAYNAME}';
@@ -42,4 +42,12 @@ annotate Students with {
           },
       ],
     };
+}
+
+
+annotate ModuleAssignments with {
+  ID @UI.Hidden @Core.Computed;
+  student @title : '{i18n>STUDENT}' @Common.Text : student.displayName @Common.TextArrangement : #TextFirst;
+  module @title : '{i18n>MODULE}' @Common.Text : module.name @Common.TextArrangement : #TextOnly;
+  assignedAt @title : '{i18n>ASSIGNED_AT}';
 }

@@ -32,6 +32,7 @@
           "action": "manage",
           "title": "{{Student-manage.flpTitle}}",
           "subTitle": "{{Student-manage.flpSubtitle}}",
+          "icon": "sap-icon://person-placeholder",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"

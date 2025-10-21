@@ -43,6 +43,7 @@ annotate service.Modules with @(
             Inline : true
         },
     ],
+    UI.LineItem.@UI.Criticality : (isUserAssigned ? 3 : 0),
     UI.SelectionFields : [credits],
     Common.SemanticKey : [name],
     UI.HeaderInfo : {

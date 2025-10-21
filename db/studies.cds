@@ -30,5 +30,20 @@ entity Modules : cuid {
 annotate Studies with {
     ID @UI.Hidden @Core.Computed;
     initials @title : '{i18n>INITIALS}';
-    name @title : '{i18n>NAME}';
+    name @title : '{i18n>NAME}' @mandatory;
+    creditsForCompletion @title : '{i18n>CREDITS_FOR_COMPLETION}';
+    duration @title : '{i18n>DURATION}';
+}
+
+annotate Modules with {
+    ID @UI.Hidden @Core.Computed;
+    name @title : '{i18n>NAME}' @mandatory;
+    credits @title : '{i18n>CREDITS}';
+    weight @title : '{WEIGHT}' @Common.FieldControl : (hasFixedWeight ? 7 : 0);
+    hasFixedWeight @title : '{i18n>HAS_FIXED_WEIGHT}';
+    validFrom @title : '{i18n>VALID_FROM}';
+    validTo @title : '{i18n>VALID_TO}';
+    isMandatory @title : '{i18n>IS_MANDATORY}';
+    isFinalThesis @title : '{i18n>IS_FINAL_THESIS}';
+    additionalInfo @title : '{i18n>ADDITIONAL_INFO}' @UI.MultiLineText;
 }

@@ -53,7 +53,17 @@ annotate service.Studies with @(
                 Value : duration,
             },
         ]
-    }
+    },
+    UI.HeaderInfo : {
+        TypeName : '{i18n>STUDY}',
+        TypeNamePlural : '{i18n>STUDIES}',
+        Title : {
+            Value : name
+        },
+        Description : {
+            Value : initials
+        }
+    },
 );
 
 annotate service.Modules with @(
