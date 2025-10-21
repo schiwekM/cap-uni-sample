@@ -13,10 +13,22 @@
     "@cap-js/sqlite": "^2",
     "cds-launchpad-plugin": "^2.2.0",
     "tsx": "^4.20.6",
-    "typescript-eslint": "^8.46.2"
+    "typescript-eslint": "^8.46.2",
+    "cds-plugin-ui5": "^0.9.3"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "watch-students-management": "cds watch --open tum.cap.sample.studentsmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-studies-management": "cds watch --open tum.cap.sample.studiesmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-module-catalogue": "cds watch --open tum.cap.sample.modulecatalogue/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
-  "private": true
+  "private": true,
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/students-management",
+    "app/studies-management",
+    "app/module-catalogue"
+  ]
 }

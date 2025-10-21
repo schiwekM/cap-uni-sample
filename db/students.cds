@@ -23,5 +23,22 @@ annotate Students with {
     firstName @title : '{i18n>FIRSTNAME}';
     lastName @title : '{i18n>LASTNAME}';
     displayName @title: '{i18n>DISPLAYNAME}';
-    study @title : '{i18n>STUDY}' @Common.Text : study.name @Common.TextArrangement : #TextOnly;
+    study @title : '{i18n>STUDY}' @mandatory @Common.Text : study.name @Common.TextArrangement : #TextOnly @Common.ValueList : {
+      CollectionPath : 'Studies',
+      Parameters : [
+          {
+              $Type : 'Common.ValueListParameterInOut',
+              LocalDataProperty : study_ID,
+              ValueListProperty : 'ID',
+          },
+          {
+              $Type : 'Common.ValueListParameterDisplayOnly',
+              ValueListProperty : 'initials',
+          },
+          {
+              $Type : 'Common.ValueListParameterDisplayOnly',
+              ValueListProperty : 'name',
+          },
+      ],
+    };
 }

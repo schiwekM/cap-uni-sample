@@ -1,0 +1,1 @@
+using ModuleCatalogue as service from '../../srv/catalogue-service';

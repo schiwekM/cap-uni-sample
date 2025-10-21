@@ -25,21 +25,7 @@ entity Modules : cuid {
     isMandatory        : Boolean default false;
     isFinalThesis      : Boolean default false;
     additionalInfo     : String(1000);
-    examOptions        : Composition of many ExamOptions
-                            on examOptions.module = $self;
     assignments : Association to many ModuleAssignments on assignments.module = $self;
-}
-
-entity ExamOptions : cuid, managed {
-  module         : Association to one Modules;
-  name           : String(255);
-  type           : Association to one ExamTypes;
-  isDefault      : Boolean default true;
-}
-
-entity ExamTypes : CodeList {
-  key code : String(12)  @Common.Text: name  @Common.TextArrangement: #TextOnly;
-      name : localized String(16);
 }
 
 annotate Studies with {
