@@ -1,0 +1,19 @@
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Student",
+      "description": "Student"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "Student",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Student"
+      ],
+      "attribute-references": []
+    }
+  ]
+}
