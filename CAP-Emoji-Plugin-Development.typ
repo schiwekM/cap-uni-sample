@@ -1,17 +1,12 @@
-#set text(font: "72")
-#set heading(numbering: "1.")
-#set par(leading: 0.75em, spacing: 1.5em)
-#show heading: it => [
-  #v(1.2em)
-  #it
-  #v(0.8em)
-]
+#import "template.typ": *
+
+#show: workshop-setup
 
 // Title Page
 #align(center)[
   #v(2cm)
   
-  #image("cap-logo.svg", width: 40%)
+  #image("files/cap-logo.svg", width: 40%)
   
   #v(2cm)
   
@@ -30,7 +25,7 @@
   #text(size: 12pt)[
     *Date:* January 20, 2026
     
-    *Contact:* Simon Engel (simon.engel01\@sap.com)
+    *Contact:* _fill out_ 
     
     *Version:* 1.0
   ]]
@@ -59,7 +54,7 @@ This exercise guides you through the development of a custom SAP Cloud Applicati
 - SAP CAP SDK (`@sap/cds-dk` installed globally)
 - Basic understanding of JavaScript and CAP framework
 - Familiarity with CDS modeling language
-- Completed all of _#link("https://pages.github.tools.sap/cap/docs/get-started/")[Getting Started]_ in Capire
+- Completed all of _#link-blue("https://pages.github.tools.sap/cap/docs/get-started/", "Getting Started")_ in Capire
 
 == Task Overview
 
@@ -200,21 +195,21 @@ When there is still time left, come up with new ideas of what the plugin can do 
 = Additional Resources
 
 *Key Concepts of CAP:*
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/get-started/concepts")[Concepts]]
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/get-started/features")[Features]]
+- #link-blue("https://pages.github.tools.sap/cap/docs/get-started/concepts", "Concepts")
+- #link-blue("https://pages.github.tools.sap/cap/docs/get-started/features", "Features")
 
 *Implementation samples and guides:*
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/guides/")[Playbook]] - at least you should have seen everything there
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/node.js/cds-facade")[cds facade]] - a good generic read to know what is available
+- #link-blue("https://pages.github.tools.sap/cap/docs/guides/", "Playbook") - at least you should have seen everything there
+- #link-blue("https://pages.github.tools.sap/cap/docs/node.js/cds-facade", "cds facade") - a good generic read to know what is available
 
 *Videos on CAP Development:*
-- #text(fill: blue)[#link("https://community.sap.com/t5/devtoberfest/best-practices-in-cap/ec-p/14215088#M1099")[Best practices]]
-- #text(fill: blue)[#link("https://community.sap.com/t5/devtoberfest/less-code-same-logic-reduce-your-custom-handlers-by-using-new-cap-features/ec-p/14214416#M1091")[Less code, same logic]] - starts to hint to plugin development when the main goal is to reduce custom code
+- #link-blue("https://community.sap.com/t5/devtoberfest/best-practices-in-cap/ec-p/14215088#M1099", "Best practices")
+- #link-blue("https://community.sap.com/t5/devtoberfest/less-code-same-logic-reduce-your-custom-handlers-by-using-new-cap-features/ec-p/14214416#M1091", "Less code, same logic") - starts to hint to plugin development when the main goal is to reduce custom code
 
 *Plugin specific documentation:*
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/node.js/cds-plugins")[Node.js Plugins]]
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/java/building-plugins")[Java Plugins]]
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/tools/apis/")[Design Time APIs]] - `add` and `build` steps
+- #link-blue("https://pages.github.tools.sap/cap/docs/node.js/cds-plugins", "Node.js Plugins")
+- #link-blue("https://pages.github.tools.sap/cap/docs/java/building-plugins", "Java Plugins")
+- #link-blue("https://pages.github.tools.sap/cap/docs/tools/apis/", "Design Time APIs") - `add` and `build` steps
 
 *Generic resources:*
-- #text(fill: blue)[#link("https://pages.github.tools.sap/cap/docs/resources/")[CAP Resources Page]]
+- #link-blue("https://pages.github.tools.sap/cap/docs/resources/", "CAP Resources Page")
