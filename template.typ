@@ -5,6 +5,7 @@
   set text(font: "72")
   set heading(numbering: "1.")
   set par(leading: 0.75em, spacing: 1.5em)
+  set raw(syntaxes: "files/syntax/cds.sublime-syntax")
   
   // Page setup with numbering and footer logo
   set page(

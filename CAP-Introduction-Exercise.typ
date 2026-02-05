@@ -1,4 +1,5 @@
 #import "template.typ": *
+set raw(syntaxes: "files/syntax/cds.sublime-syntax")
 
 #show: workshop-setup
 
@@ -34,6 +35,16 @@
   title: "Table of Contents",
   indent: auto
 )
+
+#pagebreak()
+
+#hint-block[
+  *Note:* This workshop includes two optional advanced sections at the end:
+  - *Optional: Advanced UI Customization* -- Enhance your UI with SideEffects, criticality highlighting, and conditional buttons
+  - *Optional: Deployment to Cloud Foundry* -- Deploy your application to SAP BTP Cloud Foundry
+  
+  You may explore these sections based on your time and interest after completing the main exercise.
+]
 
 #pagebreak()
 
@@ -304,4 +315,147 @@ Implement the assign action that assigns the user to the Module. In case an assi
 - Make use of the debugger to inspect the incoming requests or results from database access
 
 #v(2cm)
-Congratulations! You just created your first CAP-Application
+Congratulations! You just created your first CAP-Application.
+
+#pagebreak()
+
+= Optional: Advanced UI Customization
+
+This section covers advanced UI enhancements to make your application more polished and user-friendly.
+
+== Example UI Screenshots
+
+The following screenshots show what your finished applications could look like:
+
+*Students App:*
+#align(center)[
+  #image("files/intro-exercise/students-app-ui.png", width: 90%)
+]
+
+*Studies App:*
+#align(center)[
+  #image("files/intro-exercise/studies-app-ui.png", width: 90%)
+]
+
+*Module Catalog App:*
+#align(center)[
+  #image("files/intro-exercise/module-catalog-ui.png", width: 90%)
+]
+
+== Refresh UI with SideEffects
+
+Use `@Common.SideEffects` to refresh parts of the UI when actions are executed. This ensures the UI reflects the latest data after an action like "assign" or "unassign" is pressed.
+
+An example for having actions as a table column is given in the #link-blue("https://github.com/SAP-samples/fiori-elements-feature-showcase?tab=readme-ov-file#actions", "Fiori Elements Showcase").
+
+== Multiple Tabs Configuration
+
+Having multiple tabs can be configured via the #link-blue("https://github.com/SAP-samples/fiori-elements-feature-showcase?tab=readme-ov-file#multiple-table-mode", "manifest.json") file of your application. This allows you to organize different content sections in a tabbed interface.
+
+== Row Highlighting with Criticality
+
+Highlighting a row with color can be done via the so-called *Criticality* of the row (#link-blue("https://github.com/SAP-samples/fiori-elements-feature-showcase?tab=readme-ov-file#highlighting-line-items-based-on-criticality", "Sample")). Instead of a property reference, you can use an expression:
+
+```cds
+isUserAssigned
+```
+
+#hint-block[
+  *Note:* #link-blue("https://sap.github.io/odata-vocabularies/vocabularies/UI.html#CriticalityType", "Criticality Values"): `3` = Positive,  `0` = Neutral
+]
+
+== Conditional Action Buttons
+
+Annotating `@Core.OperationAvailable` to an action allows you to conditionally enable or disable the action button in the UI. You can specify a property from the bound entity or an expression.
+
+```cds
+@Capabilities.Deletable : false
+@Capabilities.Insertable : false
+entity Modules as projection on persistence.Modules {
+  *,
+  (exists assignments[student.userID = $user.id] ? true : false) as isUserAssigned: Boolean @(Ui.Hidden),
+} actions {
+  @(
+    Core.OperationAvailable : (not $self.isUserAssigned),
+    Common.SideEffects : {
+      TargetProperties : ['in/isUserAssigned']
+      TargetEnttities : ['/moduleCatalog.EntityContainer/ModuleAssignments']
+    }
+  )
+  action assign();
+}
+```
+
+#pagebreak()
+
+= Optional: Deployment to Cloud Foundry
+
+This section covers deploying your CAP application to SAP BTP Cloud Foundry.
+
+== Add Production Configuration
+
+Run the following commands to add the necessary configuration for production deployment:
+
+```bash
+cds add xsuaa,hana --for production
+```
+
+This adds the configuration for:
+- *XSUAA:* Authentication & Authorization service
+- *HANA:* SAP HANA Cloud database
+
+```bash
+cds add mta,workzone --for production
+```
+
+This adds the configuration for:
+- *MTA:* Multi-Target Application deployment descriptor
+- *Workzone:* Central entry point for SAP solutions (Launchpad)
+
+== Fix ui5-deploy.yaml Configuration
+
+#hint-block[
+  *Important:* Due to a current bug, you need to manually add `relativePaths: true` to every generated `ui5-deploy.yaml` file, and add the `ui5-tooling-transpile-task`:
+]
+
+#align(center)[
+  #image("files/intro-exercise/ui5-deploy-config.png", width: 80%)
+]
+
+== Cloud Foundry Login
+TODO: Update to login to their instance based on what is available.
+
+== Build and Deploy
+
+Run the following commands to install dependencies and deploy your app to Cloud Foundry:
+
+```bash
+npm install
+cds up
+```
+
+The `cds up` command bundles the build command from `mbt` with the `cf deploy` command for deployment.
+
+== Access Deployed Apps
+
+To list your deployed HTML5 applications, check your `mta.yaml` for a service name ending with `-destination`. Copy that name and run:
+
+```bash
+cf html5-list --di <destination-name> -u
+```
+
+This will list the three HTML5 archives of your apps. In the URLs shown, replace `cpp` with `launchpad` to access the applications.
+
+#hint-block[
+  *Note:* The Module catalogue app might not open if role restrictions are defined, depending on your landscape configuration.
+]
+
+== Cleanup / Undeploy
+
+To undeploy your application and clean up resources, run:
+
+```bash
+cf undeploy <ID from mta.yaml> --delete-services
+```
+
+Replace `<ID from mta.yaml>` with the actual ID specified in your `mta.yaml` file.
