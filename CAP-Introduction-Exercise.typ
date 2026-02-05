@@ -1,5 +1,4 @@
 #import "template.typ": *
-set raw(syntaxes: "files/syntax/cds.sublime-syntax")
 
 #show: workshop-setup
 
